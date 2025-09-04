@@ -1,0 +1,541 @@
+@import "tailwindcss";
+
+@theme {
+  --font-general: "general", sans-serif;
+  --font-circular-web: "circular-web", sans-serif;
+  --font-zentry: "zentry", sans-serif;
+  --font-robert-medium: "robert-medium", sans-serif;
+  --font-robert-regular: "robert-regular", sans-serif;
+  
+  --color-blue-50: #DFDFF0;
+  --color-blue-75: #dfdff2;
+  --color-blue-100: #F0F2FA;
+  --color-blue-200: #010101;
+  --color-blue-300: #4FB7DD;
+  --color-violet-300: #5724ff;
+  --color-yellow-100: #8e983f;
+  --color-yellow-300: #edff66;
+}
+
+@font-face {
+  font-family: "circular-web";
+  src: url("/fonts/circularweb-book.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "general";
+  src: url("/fonts/general.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "robert-medium";
+  src: url("/fonts/robert-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "robert-regular";
+  src: url("/fonts/robert-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "zentry";
+  src: url("/fonts/zentry-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for navbar height */
+}
+
+body {
+  width: 100dvw;
+  overflow-x: hidden;
+  background-color: #dfdff0;
+  font-family: "general", sans-serif;
+}
+
+@layer utilities {
+  /* Logo styling for circular appearance */
+  .logo-circular {
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .logo-circular:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+  }
+
+  /* Fix for Tailwind v4.0:
+     Manually define the properties since `border-white/20` is not a valid
+     class for `@apply` in v4.x's new engine.
+  */
+  .border-hsla {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /*
+   * Fix for Tailwind v4.0:
+   * Deconstructed from `@apply` because v4 does not support modifiers
+   * like `hover:`, `after:`, or `dark:` within `@apply`.
+   */
+  .nav-hover-btn {
+    position: relative;
+    font-size: 0.75rem; /* text-xs */
+    line-height: 1rem;
+    text-transform: uppercase;
+    color: rgb(239 246 255); /* text-blue-50 */
+    cursor: pointer;
+    margin-inline-start: 2.5rem; /* This is the CSS equivalent of ms-10 */
+    font-family: "general", sans-serif; /* This is the CSS equivalent of font-general */
+    background: none;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .nav-hover-btn::after {
+    content: "";
+    position: absolute;
+    bottom: -0.125rem; /* after:-bottom-0.5 */
+    left: 0;
+    height: 2px; /* after:h-[2px] */
+    width: 100%; /* after:w-full */
+    background-color: rgb(31 41 55); /* after:bg-neutral-800 */
+    transform-origin: bottom right; /* after:origin-bottom-right */
+    transform: scaleX(0); /* after:scale-x-0 */
+    transition-property: transform; /* after:transition-transform */
+    transition-duration: 300ms; /* after:duration-300 */
+    transition-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1); /* after:ease-[cubic-bezier(0.65_0.05_0.36_1)] */
+  }
+
+  .nav-hover-btn:hover::after {
+    transform-origin: bottom left; /* hover:after:origin-bottom-left */
+    transform: scaleX(1); /* hover:after:scale-x-100 */
+  }
+
+  .dark .nav-hover-btn::after {
+    background-color: #fff; /* dark:after:bg-white */
+  }
+
+
+  /* Deconstructed from `@apply` for v4 compatibility. */
+  .floating-nav {
+    background-color: #000; /* bg-black */
+    border-radius: 0.5rem; /* rounded-lg */
+    border-width: 1px; /* border */
+  }
+
+  /* Deconstructed from `@apply` for v4 compatibility. */
+  .absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Deconstructed from `@apply` for v4 compatibility. */
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mask-clip-path {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .special-font b {
+    font-family: "Zentry";
+    font-feature-settings: "ss01" on;
+  }
+
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .hero-heading {
+    text-transform: uppercase;
+    font-family: "Zentry", sans-serif;
+    font-weight: 900;
+    font-size: 3rem; /* text-5xl */
+    line-height: 1;
+  }
+  @media (min-width: 640px) {
+    .hero-heading {
+      right: 2.5rem; /* sm:right-10 */
+      font-size: 4.5rem; /* sm:text-7xl */
+      line-height: 1;
+    }
+  }
+  @media (min-width: 768px) {
+    .hero-heading {
+      font-size: 6rem; /* md:text-9xl */
+      line-height: 1;
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-heading {
+      font-size: 12rem; /* lg:text-[12rem] */
+    }
+  }
+
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .about-subtext {
+    position: absolute;
+    bottom: -80dvh;
+    left: 50%;
+    width: 100%;
+    max-width: 24rem; /* max-w-96 */
+    transform: translateX(-50%);
+    text-align: center;
+    font-family: "circular-web", sans-serif;
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.75rem;
+  }
+  @media (min-width: 768px) {
+    .about-subtext {
+      max-width: 34rem; /* md:max-w-[34rem] */
+    }
+  }
+
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .about-image {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 20;
+    height: 60vh;
+    width: 24rem; /* w-96 */
+    transform: translateX(-50%);
+    transform-origin: center;
+    overflow: hidden;
+    border-radius: 1.5rem; /* rounded-3xl */
+  }
+  @media (min-width: 768px) {
+    .about-image {
+      width: 30vw; /* md:w-[30vw] */
+    }
+  }
+
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .animated-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem; /* gap-1 */
+    font-size: 4.5rem; /* text-7xl */
+    line-height: .8;
+    text-transform: uppercase;
+    color: #fff; /* text-white */
+  }
+  @media (min-width: 640px) {
+    .animated-title {
+      padding-left: 8rem; /* sm:px-32 */
+      padding-right: 8rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .animated-title {
+      font-size: 6rem; /* md:text-[6rem] */
+    }
+  }
+
+  .animated-word {
+    font-family: "Zentry", sans-serif;
+    font-weight: 600;
+    opacity: 0;
+    transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
+    transform-origin: 50% 50% -150px !important;
+    will-change: opacity, transform;
+  }
+
+  /* Deconstructed from `@apply` for v4 compatibility. */
+  .bento-tilt_1 {
+    position: relative;
+    grid-column: span 2 / span 2;
+    overflow: hidden;
+    border-radius: 0.375rem; /* rounded-md */
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-out */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Deconstructed from `@apply` for v4 compatibility. */
+  .bento-tilt_2 {
+    position: relative;
+    grid-column: span 1 / span 1;
+    grid-row: span 1 / span 1;
+    overflow: hidden;
+    border-radius: 0.375rem; /* rounded-md */
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-out */
+  }
+
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .bento-title {
+    text-transform: uppercase;
+    font-family: "Zentry", sans-serif;
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 2.5rem;
+    font-weight: 200;
+  }
+  @media (min-width: 768px) {
+    .bento-title {
+      font-size: 3.75rem; /* md:text-6xl */
+      line-height: 1;
+    }
+  }
+
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .story-img-container {
+    position: relative;
+    height: 90vh;
+    width: 100%;
+    filter: url("#flt_tag");
+  }
+  @media (min-width: 768px) {
+    .story-img-container {
+      height: 100dvh; /* md:h-dvh */
+    }
+  }
+
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .story-img-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    clip-path: polygon(4% 0, 83% 21%, 100% 73%, 0% 100%);
+  }
+  @media (min-width: 768px) {
+    .story-img-mask {
+      left: 20%;
+      top: -10%;
+      height: 80%; /* md:size-4/5 */
+      width: 80%; /* md:size-4/5 */
+    }
+  }
+
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .story-img-content {
+    position: absolute;
+    left: 2.5rem; /* left-10 */
+    top: 4rem; /* top-16 */
+    height: 50dvh;
+    width: 100%;
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+  }
+  @media (min-width: 768px) {
+    .story-img-content {
+      left: 0;
+      top: 2.5rem; /* md:top-10 */
+      height: 100dvh; /* md:h-dvh */
+    }
+  }
+  @media (min-width: 1024px) {
+    .story-img-content {
+      left: -300px; /* lg:left-[-300px] */
+      top: -100px; /* lg:top-[-100px] */
+    }
+  }
+
+  /* Deconstructed from `@apply` for v4 compatibility. */
+  .gallery-img-container {
+    height: 16rem; /* size-64 */
+    width: 16rem; /* size-64 */
+    overflow: hidden;
+    background-color: rgb(221 214 254); /* bg-violet-300 */
+  }
+
+  /* Deconstructed from `@apply` for v4 compatibility. */
+  .gallery-img {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+  }
+  
+  /* Deconstructed from `@apply` due to responsive modifiers. */
+  .gallery-img-4 {
+    border-radius: 0.5rem; /* rounded-lg */
+  }
+  @media (min-width: 640px) {
+    .gallery-img-4 {
+        height: 20rem; /* sm:size-80 */
+        width: 20rem; /* sm:size-80 */
+    }
+  }
+  @media (min-width: 768px) {
+    .gallery-img-4 {
+        height: 24rem; /* md:h-96 */
+        width: 25rem; /* md:w-[25rem] */
+    }
+  }
+
+  .sword-man-clip-path {
+    clip-path: polygon(16% 0, 89% 15%, 75% 100%, 0 97%);
+  }
+
+  .contact-clip-path-1 {
+    clip-path: polygon(25% 0%, 74% 0, 69% 64%, 34% 73%);
+  }
+
+  .contact-clip-path-2 {
+    clip-path: polygon(29% 15%, 85% 30%, 50% 100%, 10% 64%);
+  }
+}
+
+/* Deconstructed from `@apply` for v4 compatibility. */
+.indicator-line {
+  height: 0.25rem; /* h-1 */
+  width: 1px;
+  border-radius: 9999px; /* rounded-full */
+  background-color: #fff; /* bg-white */
+  transition-property: all;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* ease-in-out */
+}
+
+.indicator-line.active {
+  animation: indicator-line 0.5s ease infinite;
+  animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+@keyframes indicator-line {
+  0% {
+    height: 4px;
+    transform: translateY(-0px);
+  }
+  50% {
+    height: 16px;
+    transform: translateY(-4px);
+  }
+  100% {
+    height: 4px;
+    transform: translateY(-0px);
+  }
+}
+
+/* From Uiverse.io by G4b413l */
+/* https://uiverse.io/G4b413l/tidy-walrus-92 */
+.three-body {
+  --uib-size: 35px;
+  --uib-speed: 0.8s;
+  --uib-color: #5d3fd3;
+  position: relative;
+  display: inline-block;
+  height: var(--uib-size);
+  width: var(--uib-size);
+  animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
+}
+
+.three-body__dot {
+  position: absolute;
+  height: 100%;
+  width: 30%;
+}
+
+.three-body__dot:after {
+  content: "";
+  position: absolute;
+  height: 0%;
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: var(--uib-color);
+  border-radius: 50%;
+}
+
+.three-body__dot:nth-child(1) {
+  bottom: 5%;
+  left: 0;
+  transform: rotate(60deg);
+  transform-origin: 50% 85%;
+}
+
+.three-body__dot:nth-child(1)::after {
+  bottom: 0;
+  left: 0;
+  animation: wobble1 var(--uib-speed) infinite ease-in-out;
+  animation-delay: calc(var(--uib-speed) * -0.3);
+}
+
+.three-body__dot:nth-child(2) {
+  bottom: 5%;
+  right: 0;
+  transform: rotate(-60deg);
+  transform-origin: 50% 85%;
+}
+
+.three-body__dot:nth-child(2)::after {
+  bottom: 0;
+  left: 0;
+  animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15)
+    ease-in-out;
+}
+
+.three-body__dot:nth-child(3) {
+  bottom: -5%;
+  left: 0;
+  transform: translateX(116.666%);
+}
+
+.three-body__dot:nth-child(3)::after {
+  top: 0;
+  left: 0;
+  animation: wobble2 var(--uib-speed) infinite ease-in-out;
+}
+
+@keyframes spin78236 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wobble1 {
+  0%,
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-66%) scale(0.65);
+    opacity: 0.8;
+  }
+}
+
+@keyframes wobble2 {
+  0%,
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(66%) scale(0.65);
+    opacity: 0.8;
+  }
+}
