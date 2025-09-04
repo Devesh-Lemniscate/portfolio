@@ -4,15 +4,15 @@ import AnimateTitle from "./AnimateTitle";
 import { BentoTilt } from "./Skills";
 
 interface ProjectCardProps {
+  src: string;
   title: React.ReactNode;
   description: string;
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
-  gradientClass?: string;
 }
 
-export const ProjectCard = ({ title, description, technologies, githubUrl, liveUrl, gradientClass = "from-blue-600/20 via-purple-600/20 to-violet-600/20" }: ProjectCardProps) => {
+export const ProjectCard = ({ src, title, description, technologies, githubUrl, liveUrl }: ProjectCardProps) => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [hoverOpacity, setHoverOpacity] = useState(0);
   const hoverButtonRef = useRef<HTMLDivElement>(null);
@@ -32,23 +32,24 @@ export const ProjectCard = ({ title, description, technologies, githubUrl, liveU
 
   return (
     <div className="relative size-full group">
-      <div className={`absolute left-0 top-0 size-full bg-gradient-to-br ${gradientClass} opacity-80 group-hover:opacity-60 transition-all duration-300`} />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent group-hover:from-black/40 transition-all duration-300" />
+      <video
+        src={src}
+        loop
+        muted
+        autoPlay
+        className="absolute left-0 top-0 size-full object-cover object-center"
+      />
+      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300" />
       
-      {/* Geometric decoration */}
-      <div className="absolute top-4 right-4 w-16 h-16 border border-white/20 rounded-full opacity-30 group-hover:opacity-50 transition-all duration-300" />
-      <div className="absolute bottom-8 left-6 w-8 h-8 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rotate-45 opacity-40 group-hover:opacity-60 transition-all duration-300" />
-      <div className="absolute top-1/2 right-8 w-4 h-16 bg-gradient-to-b from-violet-400/20 to-transparent opacity-30 group-hover:opacity-50 transition-all duration-300" />
-      
-      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-gray-800">
+      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
         <div>
-          <h1 className="bento-title special-font mb-3 text-gray-900">{title}</h1>
-          <p className="mt-3 max-w-64 text-xs md:text-base text-gray-700">{description}</p>
+          <h1 className="bento-title special-font mb-3">{title}</h1>
+          <p className="mt-3 max-w-64 text-xs md:text-base">{description}</p>
           <div className="mt-4">
-            <p className="text-xs uppercase tracking-wider opacity-70 mb-2 text-gray-600">Technologies:</p>
+            <p className="text-xs uppercase tracking-wider opacity-70 mb-2">Technologies:</p>
             <div className="flex flex-wrap gap-2">
               {technologies.map((tech, index) => (
-                <span key={index} className="rounded-full bg-gray-900/20 px-2 py-1 text-xs text-gray-800">
+                <span key={index} className="rounded-full bg-blue-50/20 px-2 py-1 text-xs">
                   {tech}
                 </span>
               ))}
@@ -105,78 +106,75 @@ const Projects = () => {
         </div>
 
         <div className="grid w-full grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
-          {/* Priority 1: DripChat */}
           <BentoTilt className="border-hsla relative h-96 overflow-hidden rounded-md">
             <ProjectCard
-              gradientClass="from-blue-600/20 via-cyan-600/20 to-teal-600/20"
+              src="videos/feature-1.mp4"
               title={
                 <>
-                  Drip<b>C</b>hat
+                  Zook<b>a</b>Lab
                 </>
               }
-              description="Built a real-time chat application with instant messaging and media sharing capabilities. Features browser-based collaborative code execution."
-              technologies={["React", "Node.js", "Socket.io", "WebSockets", "MongoDB"]}
-              githubUrl={import.meta.env.VITE_DRIPCHAT_GITHUB}
+              description="A movie recommendation system using React, Node.js, and MongoDB with real-time search capabilities."
+              technologies={["React", "Node.js", "MongoDB", "Express", "JavaScript"]}
+              githubUrl="https://github.com/Devesh-Lemniscate/ZookaLab"
+              liveUrl="https://zookalab.netlify.app"
             />
           </BentoTilt>
 
-          {/* Priority 2: DripWallet */}
           <BentoTilt className="border-hsla relative h-96 overflow-hidden rounded-md">
             <ProjectCard
-              gradientClass="from-emerald-600/20 via-green-600/20 to-lime-600/20"
+              src="videos/feature-2.mp4"
               title={
                 <>
-                  Drip<b>W</b>allet
+                  Smart<b>C</b>ab
                 </>
               }
-              description="Developed a full-stack digital wallet application enabling users to manage money, transfer funds, and pay merchants securely."
-              technologies={["React", "Node.js", "Express", "Database Transactions", "Authentication"]}
-              githubUrl={import.meta.env.VITE_DRIPWALLET_GITHUB}
+              description="An AI-powered ride-booking platform with real-time tracking and optimized route planning."
+              technologies={["React Native", "Python", "Machine Learning", "Firebase"]}
+              githubUrl="https://github.com/Devesh-Lemniscate/SmartCab"
             />
           </BentoTilt>
 
-          {/* Priority 3: NerdsByte */}
           <BentoTilt className="border-hsla relative h-96 overflow-hidden rounded-md">
             <ProjectCard
-              gradientClass="from-purple-600/20 via-violet-600/20 to-indigo-600/20"
+              src="videos/feature-3.mp4"
               title={
                 <>
-                  Nerds<b>B</b>yte
+                  Port<b>f</b>olio
                 </>
               }
-              description="Developed a robust online question bank platform tailored for company-specific interview preparation with real user base and analytics."
-              technologies={["React", "Node.js", "MongoDB", "Analytics", "Authentication"]}
-              githubUrl={import.meta.env.VITE_NERDSBYTE_GITHUB}
+              description="This very portfolio website built with React, TypeScript, GSAP animations, and modern web technologies."
+              technologies={["React", "TypeScript", "GSAP", "Tailwind CSS", "Vite"]}
+              githubUrl="https://github.com/Devesh-Lemniscate/portfolio"
+              liveUrl="#"
             />
           </BentoTilt>
 
-          {/* Priority 4: VideoStream */}
           <BentoTilt className="border-hsla relative h-96 overflow-hidden rounded-md">
             <ProjectCard
-              gradientClass="from-orange-600/20 via-red-600/20 to-pink-600/20"
+              src="videos/feature-4.mp4"
               title={
                 <>
-                  Video<b>S</b>tream
+                  Data<b>V</b>iz
                 </>
               }
-              description="Engineered a scalable video streaming platform utilizing FFmpeg for segmenting and delivering video content in real-time with adaptive streaming."
-              technologies={["FFmpeg", "Node.js", "React", "Video Processing", "REST APIs"]}
-              githubUrl={import.meta.env.VITE_VIDEOSTREAM_GITHUB}
+              description="Interactive data visualization dashboard using Python, Pandas, and Matplotlib for complex data analysis."
+              technologies={["Python", "Pandas", "Matplotlib", "Jupyter", "NumPy"]}
+              githubUrl="https://github.com/Devesh-Lemniscate/DataViz"
             />
           </BentoTilt>
 
-          {/* Priority 5: MovieApp */}
           <BentoTilt className="border-hsla relative h-96 overflow-hidden rounded-md">
             <ProjectCard
-              gradientClass="from-slate-600/20 via-gray-600/20 to-zinc-600/20"
+              src="videos/feature-5.mp4"
               title={
                 <>
-                  Movie<b>A</b>pp
+                  Chat<b>A</b>pp
                 </>
               }
-              description="Created a cross-platform mobile movie discovery app using React Native with search, genre filtering, watchlists, and responsive design."
-              technologies={["React Native", "Redux", "Third-party APIs", "iOS", "Android"]}
-              githubUrl={import.meta.env.VITE_MOVIEAPP_GITHUB}
+              description="Real-time chat application with user authentication, file sharing, and responsive design."
+              technologies={["Socket.io", "Node.js", "React", "MongoDB", "JWT"]}
+              githubUrl="https://github.com/Devesh-Lemniscate/ChatApp"
             />
           </BentoTilt>
 
@@ -188,15 +186,10 @@ const Projects = () => {
               <p className="max-w-48 text-sm text-gray-600 mb-6">
                 Explore more of my work on GitHub and see what I'm currently building.
               </p>
-              <a 
-                href={import.meta.env.VITE_GITHUB_PROFILE}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-full bg-black px-4 py-2 text-xs uppercase text-white hover:bg-gray-800 transition-colors"
-              >
+              <div className="flex items-center gap-2 rounded-full bg-black px-4 py-2 text-xs uppercase text-white">
                 <TiLocationArrow />
                 <span>GitHub Profile</span>
-              </a>
+              </div>
             </div>
           </BentoTilt>
         </div>

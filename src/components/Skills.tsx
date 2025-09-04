@@ -130,7 +130,7 @@ const Skills = () => (
 
       <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
         <SkillCard
-          src={import.meta.env.VITE_FEATURE_VIDEO_1_URL}
+          src="videos/feature-1.mp4"
           title={
             <>
               Full St<b>a</b>ck
@@ -145,7 +145,7 @@ const Skills = () => (
       <div className="grid w-full grid-cols-1 gap-7 md:h-[135vh] md:grid-cols-2 md:grid-rows-3">
         <BentoTilt className="bento-tilt_1 !col-span-1 row-span-1 md:!col-span-1 md:!row-span-2">
           <SkillCard
-            src={import.meta.env.VITE_FEATURE_VIDEO_2_URL}
+            src="videos/feature-2.mp4"
             title={
               <>
                 Mach<b>i</b>ne Learning
@@ -159,7 +159,7 @@ const Skills = () => (
 
         <BentoTilt className="bento-tilt_1 !col-span-1 row-span-1">
           <SkillCard
-            src={import.meta.env.VITE_FEATURE_VIDEO_3_URL}
+            src="videos/feature-3.mp4"
             title={
               <>
                 Mob<b>i</b>le Dev
@@ -173,7 +173,7 @@ const Skills = () => (
 
         <BentoTilt className="bento-tilt_1 !col-span-1">
           <SkillCard
-            src={import.meta.env.VITE_FEATURE_VIDEO_4_URL}
+            src="videos/feature-4.mp4"
             title={
               <>
                 Dev<b>O</b>ps

@@ -41,37 +41,14 @@ git clone <repository-url>
 # Install dependencies
 npm install
 
-# Set up environment variables
-cp .env.example .env
-# Edit .env file with your personal information and URLs
-
 # Start development server
 npm run dev
-```
 
-## 🔧 Environment Variables
+# Build for production
+npm run build
 
-Create a `.env` file in the root directory using the `.env.example` template. Fill in your personal information:
-
-```env
-# Personal Information
-VITE_FULL_NAME="Your Full Name"
-VITE_EMAIL="your.email@domain.com"
-VITE_PORTFOLIO_URL="https://your-portfolio.com"
-
-# Social Media Links
-VITE_GITHUB_PROFILE="https://github.com/yourusername"
-VITE_LINKEDIN_PROFILE="https://linkedin.com/in/yourusername"
-VITE_TWITTER_PROFILE="https://twitter.com/yourusername"
-VITE_MEDIUM_PROFILE="https://medium.com/@yourusername"
-
-# Resume/CV
-VITE_RESUME_URL="/path-to-your-resume.pdf"
-
-# Project Links (add your actual project URLs)
-VITE_DRIPCHAT_GITHUB="https://github.com/yourusername/dripchat"
-VITE_DRIPCHAT_LIVE="https://dripchat-live-url.com"
-# ... add more project URLs as needed
+# Preview production build
+npm run preview
 ```
 
 ## 📱 Live Demo

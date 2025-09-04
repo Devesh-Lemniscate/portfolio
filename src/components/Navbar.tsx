@@ -90,14 +90,13 @@ const NavBar = () => {
       <header className="absolute top-1/2 w-full -translate-y-1/2">
         <nav className="flex size-full items-center justify-between p-4">
           <div className="flex items-center gap-7">
-            <img src={import.meta.env.VITE_LOGO_URL} alt="logo" className="w-10 h-10 logo-circular object-cover" />
+            <img src="/img/logo.ico" alt="logo" className="w-10 h-10 logo-circular object-cover" />
 
             <Button
               id="resume-button"
               title="Resume"
               rightIcon={<TiLocationArrow />}
               containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
-              onClick={() => window.open(import.meta.env.VITE_RESUME_URL, '_blank')}
             />
           </div>
 
@@ -124,7 +123,7 @@ const NavBar = () => {
               <audio
                 ref={audioElementRef}
                 className="hidden"
-                src={import.meta.env.VITE_AUDIO_LOOP_URL}
+                src="/audio/loop.mp3"
                 loop
               />
               {[1, 2, 3, 4].map((bar) => (

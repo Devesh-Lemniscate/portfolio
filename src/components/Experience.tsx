@@ -68,7 +68,7 @@ const Experience = () => {
                   onMouseLeave={handleMouseLeave}
                   onMouseUp={handleMouseLeave}
                   onMouseEnter={handleMouseLeave}
-                  src={import.meta.env.VITE_ENTRANCE_IMAGE_URL}
+                  src="/img/entrance.webp"
                   alt="Experience"
                   className="object-contain"
                 />
@@ -100,7 +100,6 @@ const Experience = () => {
               id="experience-btn"
               title="View Full Resume"
               containerClass="mt-5"
-              onClick={() => window.open(import.meta.env.VITE_RESUME_URL, '_blank')}
             />
           </div>
         </div>
