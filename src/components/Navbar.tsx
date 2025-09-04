@@ -5,11 +5,7 @@ import { useWindowScroll } from "react-use";
 
 import Button from "./Button";
 
-<<<<<<< HEAD
 const navItems = ["About", "Skills", "Experience", "Projects", "Contact"];
-=======
-const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
->>>>>>> feature/navbar
 
 const NavBar = () => {
   // State for toggling audio and visual indicator
@@ -17,7 +13,6 @@ const NavBar = () => {
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
 
   // Refs for audio and navigation container
-<<<<<<< HEAD
   const audioElementRef = useRef<HTMLAudioElement>(null);
   const navContainerRef = useRef<HTMLDivElement>(null);
 
@@ -39,22 +34,10 @@ const NavBar = () => {
     }
   };
 
-=======
-  const audioElementRef = useRef(null);
-  const navContainerRef = useRef(null);
-
-  const {y: currentScrollY} = useWindowScroll();
-
-
-  const [isNavVisible, setIsNavVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
->>>>>>> feature/navbar
 
   useEffect(()=>{
     if(currentScrollY===0){
       setIsNavVisible(true);
-<<<<<<< HEAD
       if (navContainerRef.current) {
         navContainerRef.current.classList.remove('floating-nav');
       }
@@ -68,15 +51,6 @@ const NavBar = () => {
       if (navContainerRef.current) {
         navContainerRef.current.classList.add('floating-nav');
       }
-=======
-      navContainerRef.current.classList.remove('floating-nav');
-    }else if(currentScrollY > lastScrollY){
-      setIsNavVisible(false);
-      navContainerRef.current.classList.add('floating-nav');
-    }else if(currentScrollY < lastScrollY){
-      setIsNavVisible(true);
-      navContainerRef.current.classList.add('floating-nav');
->>>>>>> feature/navbar
     }
 
     setLastScrollY(currentScrollY);
@@ -98,7 +72,6 @@ const NavBar = () => {
     
   useEffect(()=>{
     if(isAudioPlaying){
-<<<<<<< HEAD
       if (audioElementRef.current) {
         audioElementRef.current.play();
       }
@@ -106,11 +79,6 @@ const NavBar = () => {
       if (audioElementRef.current) {
         audioElementRef.current.pause();
       }
-=======
-      audioElementRef.current.play();
-    }else{
-
->>>>>>> feature/navbar
     }
   }, [isAudioPlaying])
 
@@ -121,7 +89,6 @@ const NavBar = () => {
     >
       <header className="absolute top-1/2 w-full -translate-y-1/2">
         <nav className="flex size-full items-center justify-between p-4">
-<<<<<<< HEAD
           <div className="flex items-center gap-7">
             <img src={import.meta.env.VITE_LOGO_URL} alt="logo" className="w-10 h-10 logo-circular object-cover" />
 
@@ -147,31 +114,6 @@ const NavBar = () => {
                 >
                   {item}
                 </button>
-=======
-          {/* Logo and Product button */}
-          <div className="flex items-center gap-7">
-            <img src="/img/logo.png" alt="logo" className="w-10" />
-
-            <Button
-              id="product-button"
-              title="Products"
-              rightIcon={<TiLocationArrow />}
-              containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
-            />
-          </div>
-
-          {/* Navigation Links and Audio Button */}
-          <div className="flex h-full items-center">
-            <div className="hidden md:block">
-              {navItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={`#${item.toLowerCase()}`}
-                  className="nav-hover-btn"
-                >
-                  {item}
-                </a>
->>>>>>> feature/navbar
               ))}
             </div>
 
@@ -182,11 +124,7 @@ const NavBar = () => {
               <audio
                 ref={audioElementRef}
                 className="hidden"
-<<<<<<< HEAD
                 src={import.meta.env.VITE_AUDIO_LOOP_URL}
-=======
-                src="/audio/loop.mp3"
->>>>>>> feature/navbar
                 loop
               />
               {[1, 2, 3, 4].map((bar) => (
